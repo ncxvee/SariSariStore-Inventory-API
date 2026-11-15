@@ -1,16 +1,12 @@
 from flask import Flask
 
 from routes.get_products import get_products_bp
-from routes.get_product_by_id import get_product_by_id_bp
 from routes.add_product import add_product_bp
-from routes.manage_product import manage_product_bp
 
 app = Flask(__name__)
 
 app.register_blueprint(get_products_bp)
-app.register_blueprint(get_product_by_id_bp)
 app.register_blueprint(add_product_bp)
-app.register_blueprint(manage_product_bp)
 
 
 if __name__ == '__main__':
