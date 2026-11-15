@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from products import products
 
-manage_product_bp = Blueprint("manage_product", _name_)
+manage_product_bp = Blueprint("manage_product", __name__)
 
 
 @manage_product_bp.route('/products/<int:product_id>', methods=['PATCH'])
