@@ -7,11 +7,7 @@ app = Flask(__name__)
 def get_products():
     return jsonify(products)
 
-<<<<<<< Updated upstream
-#Mitchie: get product by id
-=======
-#Mitchie: Get one product by ID
->>>>>>> Stashed changes
+    #Mitchie: Get one product by ID
 @app.route('/products/<int:product_id>', methods=['GET'])
 def get_product_by_id(product_id):
     product = next(
@@ -26,9 +22,5 @@ def get_product_by_id(product_id):
 
     return jsonify(product), 200
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-if __name__ == '__main__':
-    app.run(debug=True)
+    if __name__ == '__main__':
+        app.run(debug=True)
