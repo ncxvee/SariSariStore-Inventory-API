@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 from flask import Flask, jsonify, request
 from products import products
@@ -10,7 +10,6 @@ app = Flask(__name__)
 @app.route('/products', methods=['GET'])
 def get_products():
     return jsonify(products)
-=======
 from flask import Flask
 
 from routes.get_products import get_products_bp
@@ -25,7 +24,6 @@ app.register_blueprint(get_product_by_id_bp)
 app.register_blueprint(add_product_bp)
 app.register_blueprint(manage_product_bp)
 
->>>>>>> 950aa20aabe9b5716323a0d4707a9833fa63bf87
 
 
 # PUT UPDATE PRODUCT
