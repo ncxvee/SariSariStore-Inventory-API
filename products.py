@@ -42,19 +42,19 @@ products = [
         "stock": 40
     },
     {
-        "id": 3,
+        "id": 8,
         "name": "Chuckie",
         "price": 30.00,
         "stock": 25
     },
     {
-        "id": 3,
+        "id": 9,
         "name": "Delight",
         "price": 15.00,
         "stock": 20
     },
     {
-        "id": 3,
+        "id": 10,
         "name": "C2",
         "price": 18.00,
         "stock": 30

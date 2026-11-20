@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from products import products
 
-get_product_by_id_bp = Blueprint("get_product_by_id", _name_)
+get_product_by_id_bp = Blueprint("get_product_by_id", __name__)
 
 @get_product_by_id_bp.route('/products/<int:product_id>', methods=['GET'])
 def get_product_by_id(product_id):

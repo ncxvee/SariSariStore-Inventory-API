@@ -52,7 +52,7 @@ def display_products(products):
 
 def view_products():
 
-    print("\n--- STORE INVENTORY ---")
+    print("\n----- STORE INVENTORY -----")
 
     try:
         response = requests.get(API_URL)
@@ -68,7 +68,7 @@ def view_products():
 
 def search_product():
 
-    print("\n--- SEARCH PRODUCT ---")
+    print("\n----- SEARCH PRODUCT -----")
 
     try:
         product_id = int(input("Enter Product ID: "))
@@ -95,7 +95,7 @@ def search_product():
 
 def add_product():
 
-    print("\n--- ADD NEW PRODUCT ---")
+    print("\n----- ADD NEW PRODUCT -----")
 
     name = input("Product Name: ").strip()
 
@@ -136,7 +136,7 @@ def add_product():
 
 def update_product():
 
-    print("\n--- UPDATE PRODUCT ---")
+    print("\n----- UPDATE PRODUCT -----")
 
     try:
         product_id = int(input("Enter Product ID to update: "))
@@ -198,7 +198,7 @@ def update_product():
 
 def delete_product():
 
-    print("\n--- DELETE PRODUCT ---")
+    print("\n----- DELETE PRODUCT -----")
 
     try:
         product_id = int(input("Enter Product ID to delete: "))
@@ -269,8 +269,8 @@ def main():
         else:
             print("\nInvalid choice. Please select from 1 to 6.")
 
-        input("\nPress Enter to return to the store menu...")
-        
+        input("\nPress Enter to return to the sari-sari store menu...")
+
 
 if __name__ == "__main__":
     main()
