@@ -1,11 +1,13 @@
 from flask import Blueprint, jsonify, request
 from products import products
+import math
 
 manage_product_bp = Blueprint("manage_product", __name__)
 
 
 @manage_product_bp.route('/products/<int:product_id>', methods=['PATCH'])
 def update_product(product_id):
+
     product = next(
         (p for p in products if p["id"] == product_id),
         None
@@ -16,33 +18,53 @@ def update_product(product_id):
             "error": f"Product with ID {product_id} not found."
         }), 404
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
 
-    if not data:
+    if not isinstance(data, dict) or not data:
         return jsonify({
-            "error": "Request body must contain JSON data."
+            "error": "Price and stock is required. It must contain valid numeric values."
+        }), 400
+
+    allowed_fields = ["name", "price", "stock"]
+
+    if not all(field in allowed_fields for field in data):
+        return jsonify({
+            "error": "Only name, price, and stock can be updated."
         }), 400
 
     if "name" in data:
-        if not isinstance(data["name"], str) or not data["name"].strip():
+
+        name = data["name"]
+
+        if not isinstance(name, str) or not name.strip():
             return jsonify({
                 "error": "Product name must not be empty."
             }), 400
 
+        if len(name.strip()) > 100:
+            return jsonify({
+                "error": "Product name must not exceed 100 characters."
+            }), 400
+
     if "price" in data:
+
         price = data["price"]
 
         if (isinstance(price, bool) or
-            not isinstance(price, (int, float)) or price < 0):
+            not isinstance(price, (int, float)) or
+            not math.isfinite(price) or price < 0):
+
             return jsonify({
-                "error": "Price must be a non-negative number."
+                "error": "Price must be a valid non-negative number."
             }), 400
 
     if "stock" in data:
+
         stock = data["stock"]
 
         if (isinstance(stock, bool) or
             not isinstance(stock, int) or stock < 0):
+
             return jsonify({
                 "error": "Stock must be a non-negative integer."
             }), 400
@@ -61,6 +83,7 @@ def update_product(product_id):
 
 @manage_product_bp.route('/products/<int:product_id>', methods=['DELETE'])
 def delete_product(product_id):
+
     product = next(
         (p for p in products if p["id"] == product_id),
         None

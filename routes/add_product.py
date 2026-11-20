@@ -1,16 +1,18 @@
 from flask import Blueprint, jsonify, request
 from products import products
+import math
 
 add_product_bp = Blueprint("add_product", __name__)
 
 
 @add_product_bp.route('/products', methods=['POST'])
 def add_product():
-    data = request.get_json()
 
-    if not data:
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
         return jsonify({
-            "error": "Request body must contain JSON data."
+            "error": "Price and stock is required. It must contain valid numeric values."
         }), 400
 
     name = data.get("name")
@@ -22,14 +24,22 @@ def add_product():
             "error": "Product name is required."
         }), 400
 
-    if (isinstance(price, bool) or
-        not isinstance(price, (int, float)) or price < 0):
+    if len(name.strip()) > 100:
         return jsonify({
-            "error": "Price must be a non-negative number."
+            "error": "Product name must not exceed 100 characters."
+        }), 400
+
+    if (isinstance(price, bool) or
+        not isinstance(price, (int, float)) or
+        not math.isfinite(price) or price < 0):
+
+        return jsonify({
+            "error": "Price must be a valid non-negative number."
         }), 400
 
     if (isinstance(stock, bool) or
         not isinstance(stock, int) or stock < 0):
+
         return jsonify({
             "error": "Stock must be a non-negative integer."
         }), 400
